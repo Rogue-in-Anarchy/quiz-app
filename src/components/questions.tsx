@@ -6,6 +6,7 @@ interface QuestionProps {
   handleAnswerSelection: (selectedOption: string) => void;
 }
 
+
 const Question: React.FC<QuestionProps> = ({ question, options, handleAnswerSelection }) => {
   return (
     <div>

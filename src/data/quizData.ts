@@ -6,7 +6,7 @@ const quizData = [
     correctAnswer: "Mississippi",
   },
   {
-    question: "Which is the farthest planet from the son?",
+    question: "Which is the farthest planet from the sun?",
     options: ["Earth", "Pluto", "Venus", "Jupiter"],
     correctAnswer: "Pluto",
   },
