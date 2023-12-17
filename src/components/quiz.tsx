@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import Question from './Question';
-import Result from './Result';
-import quizData from '../data/questions'; // Assuming questions are in a separate file
+import Question from '../components/questions';
+import quizData from '../data/quizData'; // Assuming questions are in a separate file
 
 interface QuizProps {}
 
