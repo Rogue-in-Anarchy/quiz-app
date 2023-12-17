@@ -1,35 +1,66 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import { useState } from 'react';
 import './App.css'
+import Question from './components/questions'
+import quizData from './data/quizData.ts'
+import Result from './components/result.tsx';
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [sampleQuestionIndex, setSampleQuestionIndex] = useState(0);
+  const [sampleQuestion, setSampleQuestion] = useState(quizData[sampleQuestionIndex]);
+  const [score, setScore] = useState(0);
+  const [result, setResult] = useState(false);
+
+  const handleAnswerSelection = (selectedOption: string) => {
+    // Handle answer selection logic here
+    if(selectedOption === sampleQuestion.correctAnswer){
+      if(sampleQuestionIndex + 1 === quizData.length){
+      console.log('correct');
+      console.log(`Selected option: ${selectedOption}`);
+      setResult(true)
+      }else{
+        console.log('correct');
+        console.log(`Selected option: ${selectedOption}`);
+        setSampleQuestionIndex((prevIndex) => prevIndex + 1);
+        setSampleQuestion(quizData[sampleQuestionIndex + 1]);
+
+      }
+      setScore((prevScore) => prevScore + 1);
+      console.log(sampleQuestionIndex);
+    }
+    else{
+      if(sampleQuestionIndex + 1 === quizData.length){
+        console.log('incorrect');
+        console.log(`Selected option: ${selectedOption}`);
+      }else{
+        console.log('incorrect');
+        console.log(`Selected option: ${selectedOption}`);
+        setSampleQuestionIndex((prevIndex) => prevIndex + 1);
+        setSampleQuestion(quizData[sampleQuestionIndex + 1]);
+        console.log(`Selected option: ${selectedOption}`);
+      }
+    }
+  };
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <div>
+
+    </div>
+    <div>
+    {result ? (
+        <Result score={score} />
+      ) :
+    <><div>
+            <h1>Question {sampleQuestionIndex + 1}/{quizData.length}</h1>
+          </div><Question
+              question={sampleQuestion.question}
+              options={sampleQuestion.options}
+              handleAnswerSelection={handleAnswerSelection} /></>}
+    </div>
     </>
   )
 }
 
 export default App
+
+
