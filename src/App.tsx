@@ -1,14 +1,25 @@
+import { useState } from 'react';
 import './App.css'
 import Question from './components/questions'
 import quizData from './data/quizData.ts'
 
 function App() {
-  const sampleQuestionIndex = 0; // Adjust this index as needed
-  const sampleQuestion = quizData[sampleQuestionIndex];
+  const [sampleQuestionIndex, setSampleQuestionIndex] = useState(0);
+  const [sampleQuestion, setSampleQuestion] = useState(quizData[sampleQuestionIndex]);
 
   const handleAnswerSelection = (selectedOption: string) => {
     // Handle answer selection logic here
-    console.log(`Selected option: ${selectedOption}`);
+    if(selectedOption === sampleQuestion.correctAnswer){
+      console.log('correct')
+      console.log(`Selected option: ${selectedOption}`);
+      setSampleQuestionIndex((prevIndex) => prevIndex + 1);
+      setSampleQuestion(quizData[sampleQuestionIndex + 1]);
+      console.log(sampleQuestionIndex);
+    }
+    else{
+      console.log('incorrect')
+      console.log(`Selected option: ${selectedOption}`);
+    }
   };
 
   return (
